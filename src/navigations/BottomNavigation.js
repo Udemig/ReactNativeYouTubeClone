@@ -6,23 +6,26 @@ import TrendingScreen from '../screens/TrendingScreen';
 import SubscriptionsScreen from '../screens/SubscriptionsScreen';
 import ActivityScreen from '../screens/ActivityScreen';
 import LibraryScreen from '../screens/LibraryScreen';
-import MIcon from '../components/MIcon';
+import MIcon from '../components/CoreComponents/MIcon';
+import HomeStack from '../screens/StackScreens/HomeStack';
 
 const BottomNavigation = () => {
   const Bottom = createBottomTabNavigator();
   return (
     <Bottom.Navigator
       screenOptions={{tabBarActiveTintColor: '#e91e63', headerShown: false}}>
-      <Bottom.Screen
+
+<Bottom.Screen
         options={{
           tabBarIcon: ({color, size}) => (
-            <MIcon name="home" color={color} size={size} />
+            <MIcon name="musical-notes" color={color} size={size} />
           ),
         }}
-        name="HomeScreen"
-        component={HomeScreen}
+        name="SubscriptionScreen"
+        component={SubscriptionsScreen}
       />
-      <Bottom.Screen
+
+<Bottom.Screen
         options={{
           tabBarIcon: ({color, size}) => (
             <MIcon name="trending-up" color={color} size={size} />
@@ -34,12 +37,14 @@ const BottomNavigation = () => {
       <Bottom.Screen
         options={{
           tabBarIcon: ({color, size}) => (
-            <MIcon name="musical-notes" color={color} size={size} />
+            <MIcon name="home" color={color} size={size} />
           ),
         }}
-        name="SubscriptionScreen"
-        component={SubscriptionsScreen}
+        name="HomeScreen"
+        component={HomeStack}
       />
+
+     
       <Bottom.Screen
         options={{
           tabBarIcon: ({color, size}) => (

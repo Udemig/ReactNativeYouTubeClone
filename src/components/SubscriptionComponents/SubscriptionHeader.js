@@ -1,18 +1,22 @@
 import {StyleSheet, Text, View, Image} from 'react-native';
 import React from 'react';
-import MIcon from './CoreComponents/MIcon';
+import MIcon from '../CoreComponents/MIcon';
+import BadgetIcon from '../BadgetIcon';
 
-const Header = () => {
+const SubscriptionHeader = () => {
   return (
     <View className="bg-white p-3 flex-row justify-between items-center">
       <Image
         className="w-20 h-10"
-        source={require('../assets/images/logo.png')}
+        source={require('../../assets/images/logo.png')}
       />
 
-    
-      <View className="flex-row items-center gap-3">
-        <MIcon name={'camera-outline'} size={25} />
+      <View className="flex-row justify-center items-center gap-5">
+        <MIcon name={'bar-chart-outline'} size={25} />
+        <View>
+        
+          <BadgetIcon label={9}iconName={'notifications-outline'} size={25}  />
+        </View>
         <MIcon name={'search-outline'} size={25} />
         <Image
           className="w-8 h-8 rounded-full"
@@ -25,6 +29,6 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default SubscriptionHeader;
 
 const styles = StyleSheet.create({});

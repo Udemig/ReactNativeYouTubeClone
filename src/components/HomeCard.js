@@ -1,10 +1,11 @@
-import {StyleSheet, Text, View, Image} from 'react-native';
+import {StyleSheet, Text, View, Image, Touchable, TouchableOpacity} from 'react-native';
 import React from 'react';
-import MIcon from './MIcon';
+import MIcon from './CoreComponents/MIcon';
 
-const HomeCard = () => {
+const HomeCard = ({onPress}) => {
+
   return (
-    <View>
+    <TouchableOpacity onPress={onPress}>
       {/* Thumbnail ve süre sayacı*/}
       <View className="justify-center items-center relative">
         <Image
@@ -31,17 +32,17 @@ const HomeCard = () => {
           />
 
           <View>
-            <Text>Videonun Adı</Text>
+            <Text className="text-white text-base font-semibold">Videonun Adı</Text>
             <View className="flex-row gap-2">
-              <Text className='text-slate-600'>Kanal Adı</Text>
-              <Text className='text-slate-600'>250.000</Text>
-              <Text className='text-slate-600'>16.00</Text>
+              <Text className="text-stone-500">Kanal Adı</Text>
+              <Text className="text-stone-500">250.000</Text>
+              <Text className="text-stone-500">16.00</Text>
             </View>
           </View>
         </View>
-        <MIcon name={'ellipsis-vertical'} size={20} />
+        <MIcon name={'ellipsis-vertical'} size={20} color={'rgb(120 113 108)'} />
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
