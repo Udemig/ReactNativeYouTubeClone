@@ -1,15 +1,18 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import MIcon from '../CoreComponents/MIcon';
+import PressebleIcon from '../CoreComponents/PressebleIcon';
+import { useNavigation } from '@react-navigation/native';
 
 const TrendsHeader = () => {
+  const navigation=useNavigation()
   return (
     //Hepsini Kapsayan Kutu
     <View className="flex-row justify-between p-3 bg-white">
       {/*Geri İconu ve Trend yazısı*/}
 
       <View className="flex-row items-center justify-center gap-3">
-        <MIcon name={'arrow-back-outline'} size={24} />
+        <PressebleIcon onPress={()=>navigation.navigate('HomeStackScreen')} name={'arrow-back-outline'} size={24} />
         <Text className="font-semibold text-lg">Trendler</Text>
       </View>
 

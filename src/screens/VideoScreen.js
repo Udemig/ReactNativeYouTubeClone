@@ -8,15 +8,47 @@ import {
   Touchable,
   TouchableOpacity,
 } from 'react-native';
-import React from 'react';
+import React, {useState,useEffect} from 'react';
 import MIcon from '../components/CoreComponents/MIcon';
 import VideoHeader from '../components/VideoHeader';
 import ChannelCard from '../components/ChannelCard';
 import CommentsCard from '../components/CommentsCard';
 import HomeCard from '../components/HomeCard';
+import axios from 'axios';
 
-const VideoScreen = () => {
+const VideoScreen = props => {
   const list = [1, 2, 3, 4, 5];
+  console.log(props.route.params.video);
+  const [videoDetail, setVideoDetail] = useState(props.route.params.video);
+  //console.log(videoDetail)
+  const [videos,setVideos]=useState([])
+  const getVideos = async () => {
+    try {
+      const response = await axios.get(
+        'https://www.googleapis.com/youtube/v3/videos',
+
+        
+    {
+      params: {
+        key:'AIzaSyC_5DBVu2qd_OZR4bJ63k0lwFqSO1OM_SE',
+        part:'snippet',
+        chart:'mostPopular',
+        maxResult:10,
+      },
+  
+    }
+      );
+     // console.log(response.data.items);
+      setVideos(response.data.items)
+    } catch (error) {
+      console.log(error);
+    }
+  };
+useEffect(()=>{
+getVideos()
+},[])
+
+  const videoTitle = videoDetail?.snippet.title;
   return (
     // En dış ana ekran ve flex:1 boyutlandırması yaptık
 
@@ -29,7 +61,7 @@ const VideoScreen = () => {
           className="w-100 "
           style={{width: '100%', height: '100%'}}
           source={{
-            uri: 'https://images.unsplash.com/photo-1639020715359-f03b05835829?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8dW5zcGFsc2h8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60',
+            uri: `${videoDetail?.snippet.thumbnails.standard.url}`,
           }}
         />
       </TouchableOpacity>
@@ -39,15 +71,15 @@ const VideoScreen = () => {
 
           {/*Video  Info*/}
 
-          <VideoHeader />
-          <ChannelCard />
+          <VideoHeader header={videoTitle} />
+          <ChannelCard channelTitle={videoDetail?.snippet.channelTitle} />
           <CommentsCard />
         </View>
 
         {/*Alt kısımda bulunan 2/5 yer kaplayan yapı (Önerilen videolar)*/}
         <View className="bg-stone-900" style={{flex: 1}}>
           <Text>
-            <FlatList data={list} renderItem={({item}) => <HomeCard />} />
+            <FlatList data={videos} renderItem={({item}) => <HomeCard videoInfo={item} theme={'dark'} />} />
           </Text>
         </View>
       </ScrollView>

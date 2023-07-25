@@ -2,7 +2,7 @@ import {StyleSheet, Text, View, Image} from 'react-native';
 import React from 'react';
 import MIcon from './CoreComponents/MIcon';
 import YButton from './CoreComponents/YButton';
-const ChannelCard = () => {
+const ChannelCard = ({channelTitle}) => {
   return (
     <View className="p-2 flex-row justify-between items-center bg-stone-900 p-3 border-t border-stone-500 border-b">
       <View className="gap-2 flex-row items-center">
@@ -14,7 +14,7 @@ const ChannelCard = () => {
         />
 
         <View>
-          <Text className='text-white'>Udemig Eğitim</Text>
+          <Text className='text-white'>{channelTitle}</Text>
           <View className="flex-row gap-2">
             <Text className="text-stone-500">5m Abone</Text>
           </View>

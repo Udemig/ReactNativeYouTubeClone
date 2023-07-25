@@ -1,22 +1,75 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import {Animated,Pressable, StyleSheet, Text, View,TouchableOpacity} from 'react-native';
+import React, {useState,useRef,useEffect} from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import MIcon from './CoreComponents/MIcon';
 import IconBox from './CoreComponents/IconBox';
-const VideoHeader = () => {
+import PressebleIcon from './CoreComponents/PressebleIcon';
+const VideoHeader = ({header}) => {
+  const [headHeight, setHeadHeight] = useState(null);
+
+  const arrayHeader = header.split('');
+  const headerLenght = arrayHeader.length;
+  //console.log(headerLenght)
+  const shortHeader = header.split('').slice(0, 40).join('');
+  //console.log(shortHeader)
+
+  const heightAnimation = useRef(new Animated.Value(0)).current;
+
+  const handleToggleHeadHeight = () => {
+    if (headHeight === null) {
+      // Yavaşça yüksekliği artırma animasyonu
+      Animated.timing(heightAnimation, {
+        toValue: 1,
+        duration: 500, // Animasyonun süresi (ms)
+        useNativeDriver: false, // Native sürücü kullanımı (true'dan false'a)
+      }).start();
+      setHeadHeight('h-20');
+    } else {
+      // Yavaşça yüksekliği azaltma animasyonu
+      Animated.timing(heightAnimation, {
+        toValue: 0,
+        duration: 500, // Animasyonun süresi (ms)
+        useNativeDriver: false, // Native sürücü kullanımı (true'dan false'a)
+      }).start();
+      setHeadHeight(null);
+    }
+  };
+
+  const interpolatedHeight = heightAnimation.interpolate({
+    inputRange: [0, 1],
+    outputRange: ['32%', '50%'], // Değer aralıklarına göre yükseklik değerleri
+  });
   return (
     <View className="bg-stone-900 p-3">
       {/*Video Başlık info*/}
 
       <View className="">
-        <View className="flex-row justify-between">
-          <Text className="text-white text-lg font-semibold">
-            Google Pixel ? Pixel Buds{' '}
-          </Text>
-          <MIcon name={'chevron-down-outline'} color={'white'} size={20} />
-        </View>
+      <Animated.View style={{ height: interpolatedHeight }}>
+      <View className={`flex-row justify-between px-2 gap-3 ${headHeight} `}>
+        <Text className="text-white text-lg font-semibold">
+          {headHeight ? header : shortHeader + '...'}
+        </Text>
+       
+          {headHeight ? (
+            <PressebleIcon
+            onPress={handleToggleHeadHeight}
+              name={'chevron-up-outline'}
+              color={'white'}
+              size={25}
+            />
+          ) : (
+            <PressebleIcon
+            onPress={handleToggleHeadHeight}
+              name={'chevron-down-outline'}
+              color={'white'}
+              size={25}
+            />
+          )}
+   
+      </View>
+    </Animated.View>
         <View>
-          <Text className="text-stone-500">1.057.571 görüntüleme</Text>
+          <Text className="text-stone-500 mt-2 ml-3">1.057.571 görüntüleme</Text>
         </View>
       </View>
 

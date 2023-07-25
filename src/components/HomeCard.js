@@ -1,9 +1,26 @@
-import {StyleSheet, Text, View, Image, Touchable, TouchableOpacity} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  Touchable,
+  TouchableOpacity,
+} from 'react-native';
 import React from 'react';
 import MIcon from './CoreComponents/MIcon';
 
-const HomeCard = ({onPress}) => {
+const HomeCard = ({onPress, videoInfo,theme}) => {
+  // console.log(videoInfo)
+  //Gelen videInfo içindeki tarihi diziye çeiviroyr diziye dönüştruloyr
+  const publishDate = videoInfo?.snippet.publishedAt.split('');
 
+  //diziye çevirdiğim date bilgisi içierisnden 11 ile 16 arasındaki elemanları alıyoruz ve join metodu ile stringe çeviriyoruz
+  const stringPublishDate = publishDate?.slice(11, 16).join('');
+  // console.log(stringPublishDate)
+
+  const videoTitle = videoInfo?.snippet.title.split('').slice(0, 40).join('');
+
+  //console.log(videoTitle);
   return (
     <TouchableOpacity onPress={onPress}>
       {/* Thumbnail ve süre sayacı*/}
@@ -11,7 +28,7 @@ const HomeCard = ({onPress}) => {
         <Image
           className="w-screen h-60"
           source={{
-            uri: 'https://images.unsplash.com/photo-1639020715359-f03b05835829?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8dW5zcGFsc2h8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60',
+            uri: `${videoInfo?.snippet.thumbnails.standard.url}`,
           }}
         />
 
@@ -32,15 +49,23 @@ const HomeCard = ({onPress}) => {
           />
 
           <View>
-            <Text className="text-white text-base font-semibold">Videonun Adı</Text>
+            <Text className={` ${theme == 'dark' ? 'text-white' : 'text-black '} text-base font-semibold`} >
+              {videoTitle}...
+            </Text>
             <View className="flex-row gap-2">
-              <Text className="text-stone-500">Kanal Adı</Text>
+              <Text className="text-stone-500 ">
+                {videoInfo?.snippet.channelTitle}
+              </Text>
               <Text className="text-stone-500">250.000</Text>
-              <Text className="text-stone-500">16.00</Text>
+              <Text className="text-stone-500">{stringPublishDate}</Text>
             </View>
           </View>
         </View>
-        <MIcon name={'ellipsis-vertical'} size={20} color={'rgb(120 113 108)'} />
+        <MIcon
+          name={'ellipsis-vertical'}
+          size={20}
+          color={'rgb(120 113 108)'}
+        />
       </View>
     </TouchableOpacity>
   );

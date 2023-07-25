@@ -8,12 +8,22 @@ import ActivityScreen from '../screens/ActivityScreen';
 import LibraryScreen from '../screens/LibraryScreen';
 import MIcon from '../components/CoreComponents/MIcon';
 import HomeStack from '../screens/StackScreens/HomeStack';
+import TrendsStack from '../screens/StackScreens/TrendsStack';
 
 const BottomNavigation = () => {
   const Bottom = createBottomTabNavigator();
   return (
     <Bottom.Navigator
       screenOptions={{tabBarActiveTintColor: '#e91e63', headerShown: false}}>
+           <Bottom.Screen
+        options={{
+          tabBarIcon: ({color, size}) => (
+            <MIcon name="home" color={color} size={size} />
+          ),
+        }}
+        name="HomeStackScreen"
+        component={HomeStack}
+      />
 
 <Bottom.Screen
         options={{
@@ -34,15 +44,7 @@ const BottomNavigation = () => {
         name="TrendingScreen"
         component={TrendingScreen}
       />
-      <Bottom.Screen
-        options={{
-          tabBarIcon: ({color, size}) => (
-            <MIcon name="home" color={color} size={size} />
-          ),
-        }}
-        name="HomeScreen"
-        component={HomeStack}
-      />
+   
 
      
       <Bottom.Screen
