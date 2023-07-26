@@ -6,6 +6,7 @@ import SubscriptionChannelsAvatar from '../components/SubscriptionComponents/Sub
 import SubsFilterButton from '../components/SubscriptionComponents/SubsFilterButton';
 import HomeCard from '../components/HomeCard';
 import StatusCard from '../components/StatusCard/StatusCard';
+import { defaultVideo } from '../utils/defaultVideo';
 
 const SubscriptionsScreen = () => {
   const [filterIndex, setFilterIndex] = useState(0);
@@ -126,7 +127,7 @@ const SubscriptionsScreen = () => {
         />
       </ScrollView>
 
-      <HomeCard />
+      <HomeCard videoInfo={defaultVideo}/>
       <StatusCard/>
     </ScrollView>
   );

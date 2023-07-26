@@ -9,18 +9,7 @@ import {
 import React from 'react';
 import MIcon from './CoreComponents/MIcon';
 
-const HomeCard = ({onPress, videoInfo,theme}) => {
-  // console.log(videoInfo)
-  //Gelen videInfo içindeki tarihi diziye çeiviroyr diziye dönüştruloyr
-  const publishDate = videoInfo?.snippet.publishedAt.split('');
-
-  //diziye çevirdiğim date bilgisi içierisnden 11 ile 16 arasındaki elemanları alıyoruz ve join metodu ile stringe çeviriyoruz
-  const stringPublishDate = publishDate?.slice(11, 16).join('');
-  // console.log(stringPublishDate)
-
-  const videoTitle = videoInfo?.snippet.title.split('').slice(0, 40).join('');
-
-  //console.log(videoTitle);
+const HomeCard = ({onPress, videoInfo, theme}) => {
   return (
     <TouchableOpacity onPress={onPress}>
       {/* Thumbnail ve süre sayacı*/}
@@ -28,12 +17,12 @@ const HomeCard = ({onPress, videoInfo,theme}) => {
         <Image
           className="w-screen h-60"
           source={{
-            uri: `${videoInfo?.snippet.thumbnails.standard.url}`,
+            uri: videoInfo?.videoThumbnail,
           }}
         />
 
         <View className="bg-slate-800 rounded absolute right-4 bottom-3">
-          <Text className=" text-white p-1  ">6:43</Text>
+          <Text className=" text-white p-1  ">{videoInfo?.videoDuration}</Text>
         </View>
       </View>
 
@@ -49,15 +38,18 @@ const HomeCard = ({onPress, videoInfo,theme}) => {
           />
 
           <View>
-            <Text className={` ${theme == 'dark' ? 'text-white' : 'text-black '} text-base font-semibold`} >
-              {videoTitle}...
+            <Text
+              className={` ${
+                theme == 'dark' ? 'text-white' : 'text-black '
+              } text-base font-semibold`}>
+              {videoInfo?.videoTitle}
             </Text>
             <View className="flex-row gap-2">
-              <Text className="text-stone-500 ">
-                {videoInfo?.snippet.channelTitle}
+              <Text className="text-stone-500 ">{videoInfo?.channelTitle}</Text>
+              <Text className="text-stone-500">{videoInfo?.videoViews}</Text>
+              <Text className="text-stone-500">
+                {videoInfo?.videoPublishedDate}
               </Text>
-              <Text className="text-stone-500">250.000</Text>
-              <Text className="text-stone-500">{stringPublishDate}</Text>
             </View>
           </View>
         </View>

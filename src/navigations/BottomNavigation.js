@@ -15,7 +15,7 @@ const BottomNavigation = () => {
   return (
     <Bottom.Navigator
       screenOptions={{tabBarActiveTintColor: '#e91e63', headerShown: false}}>
-           <Bottom.Screen
+      <Bottom.Screen
         options={{
           tabBarIcon: ({color, size}) => (
             <MIcon name="home" color={color} size={size} />
@@ -25,7 +25,7 @@ const BottomNavigation = () => {
         component={HomeStack}
       />
 
-<Bottom.Screen
+      <Bottom.Screen
         options={{
           tabBarIcon: ({color, size}) => (
             <MIcon name="musical-notes" color={color} size={size} />
@@ -35,7 +35,7 @@ const BottomNavigation = () => {
         component={SubscriptionsScreen}
       />
 
-<Bottom.Screen
+      <Bottom.Screen
         options={{
           tabBarIcon: ({color, size}) => (
             <MIcon name="trending-up" color={color} size={size} />
@@ -44,9 +44,7 @@ const BottomNavigation = () => {
         name="TrendingScreen"
         component={TrendingScreen}
       />
-   
 
-     
       <Bottom.Screen
         options={{
           tabBarIcon: ({color, size}) => (

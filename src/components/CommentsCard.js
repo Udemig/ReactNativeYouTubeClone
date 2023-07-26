@@ -7,7 +7,7 @@ const CommentsCard = () => {
   return (
 
     //En Dış Kutu
-    <View className='mb-32'>
+    <View className='mb-6'>
 
         {/*yorumlar başlığı ve Icon*/}
   <View className='flex-row justify-between p-2 ' >

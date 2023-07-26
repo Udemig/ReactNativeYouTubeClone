@@ -7,11 +7,7 @@ import PressebleIcon from './CoreComponents/PressebleIcon';
 const VideoHeader = ({header}) => {
   const [headHeight, setHeadHeight] = useState(null);
 
-  const arrayHeader = header.split('');
-  const headerLenght = arrayHeader.length;
-  //console.log(headerLenght)
-  const shortHeader = header.split('').slice(0, 40).join('');
-  //console.log(shortHeader)
+console.log('header',header.longHeader)
 
   const heightAnimation = useRef(new Animated.Value(0)).current;
 
@@ -40,26 +36,26 @@ const VideoHeader = ({header}) => {
     outputRange: ['32%', '50%'], // Değer aralıklarına göre yükseklik değerleri
   });
   return (
-    <View className="bg-stone-900 p-3">
+    <View className="bg-stone-900 p-4">
       {/*Video Başlık info*/}
 
       <View className="">
-      <Animated.View style={{ height: interpolatedHeight }}>
+      <View style={{ height: interpolatedHeight }}>
       <View className={`flex-row justify-between px-2 gap-3 ${headHeight} `}>
         <Text className="text-white text-lg font-semibold">
-          {headHeight ? header : shortHeader + '...'}
+          {headHeight ? header.longHeader : header.shortHeader + '...'}
         </Text>
        
           {headHeight ? (
             <PressebleIcon
-            onPress={handleToggleHeadHeight}
+            onPress={()=>setHeadHeight(null)}
               name={'chevron-up-outline'}
               color={'white'}
               size={25}
             />
           ) : (
             <PressebleIcon
-            onPress={handleToggleHeadHeight}
+            onPress={()=>setHeadHeight('h-20')}
               name={'chevron-down-outline'}
               color={'white'}
               size={25}
@@ -67,7 +63,7 @@ const VideoHeader = ({header}) => {
           )}
    
       </View>
-    </Animated.View>
+    </View>
         <View>
           <Text className="text-stone-500 mt-2 ml-3">1.057.571 görüntüleme</Text>
         </View>
